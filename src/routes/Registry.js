@@ -6,7 +6,7 @@ function Registry(){
     const [textInput, setTextInput] = useState("")
     const [error, setError] = useState(false)
     const addItem = (e) => {
-        if(error) return;
+        if(error || textInput.length == 0) return;
         e.preventDefault();
         const tempData = [...registryData];
         tempData.push(textInput)
@@ -25,14 +25,14 @@ function Registry(){
         setRegistryData(newData)
     }
     const editItem = (index) => {
-        if(error) return;
+        if(error || textInput.length == 0) return;
         let newData = [...registryData]
         newData[index] = textInput;
         setRegistryData(newData)
     }
     return(
         <dive>
-            <h1>Registry</h1>
+            <h1 className="headers">Registry</h1>
             <Link to="/">Click here to go to home</Link>
             <form onSubmit={addItem}>
                 <label>text input: 
@@ -41,13 +41,15 @@ function Registry(){
                 <br/><input type="submit" value="Submit" />
             </form>
             {error ? <span style={{color: "red"}}>Error occured.</span> : null}
+            <ul>           
             {
                 registryData.map((item, index) => {
                     return(
-                        <li key={index}>{item} <button onClick={() => removeItem(index)}>Remove</button> <button onClick={() => editItem(index)}>Update</button></li>
+                        <li key={index}>{item} <div className="buttons"><button onClick={() => removeItem(index)}>Remove</button> <button onClick={() => editItem(index)}>Update</button></div></li>
                     )
                 })
             }
+            </ul>
         </dive>
     )
 }

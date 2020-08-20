@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Home(){
     return(
         <dive>
-            <h1>Home</h1>
+            <h1 className="headers">Home</h1>
             <Link to="/registry">Click here to go to registry</Link>
         </dive>
     )
